@@ -49,9 +49,18 @@ const Nav = styled.nav`
   a:hover {
     opacity: 0.85;
   }
+
+  @media (max-width: 600px) {
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    a {
+      margin-right: 20px;
+      font-size: 14px;
+    }
+  }
 `;
 
-/* HERO-otsikko keskelle */
 const Content = styled.div`
   position: relative;
   z-index: 2;
@@ -68,7 +77,7 @@ const Content = styled.div`
     letter-spacing: 0.05em;
     line-height: 1;
     margin: 0;
-    font-size: clamp(62px, 9vw, 140px);
+    font-size: clamp(52px, 9vw, 140px);
   }
 
   .first {
@@ -79,6 +88,20 @@ const Content = styled.div`
     display: block;
     margin-top: 0.1em;
     margin-left: 2em;
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 52px;
+      line-height: 1.1;
+    }
+    .first {
+      margin-right: 2em;
+    }
+    .last {
+      margin-left: 1em;
+      margin-right: 0;
+    }
   }
 `;
 
