@@ -14,19 +14,20 @@ export default function Home() {
   return (
     <>
       <HeroMotion />
+      <About />
       <NameAndGallery />
-
-      <Section>
-        <Container>
-          <h2>Highlights</h2>
-          <VideoEmbed id="YOUTUBE_VIDEO_ID" />
-        </Container>
-      </Section>
 
       <Section>
         <Container>
           <h2>Yhteistyökumppanit</h2>
           <SponsorGrid />
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <h2>Highlights</h2>
+          <VideoEmbed />
         </Container>
       </Section>
     </>

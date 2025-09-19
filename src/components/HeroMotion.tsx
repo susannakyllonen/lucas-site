@@ -116,16 +116,17 @@ export default function HeroMotion() {
           style={{
             y: titleY,
             scale: titleScale,
-            opacity: titleOpacity,
+            opacity: 1,
             margin: 0,
             color: "#fff",
             textAlign: "center",
             padding: "0 6vw",
             fontFamily: "Satoshi, sans-serif",
-            fontWeight: 500,
-            letterSpacing: "0.02em",
+            fontWeight: 400,
+            textTransform: "uppercase",
+            letterSpacing: "0.01em",
             lineHeight: 0.92,
-            fontSize: "clamp(34px, 8.5vw, 120px)", // mobiilissa vähän pienempi min
+            fontSize: "clamp(34px, 8.5vw, 130px)", // mobiilissa vähän pienempi min
           }}
           initial={{ y: 60, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}

@@ -45,7 +45,7 @@ const MinustaWrap = styled(motion.div)`
     font-weight: 700;
     font-size: 18px;
     text-decoration: none;
-    border: 2px solid #000;
+
     transition: transform 0.15s ease, opacity 0.15s ease;
   }
   a.btn:hover {
@@ -110,7 +110,7 @@ const IMAGES_DESKTOP: ImgSpec[] = [
     w: 400,
     h: 500,
     top: "30%",
-    left: "50%",
+    left: "40%",
     yMove: 15,
     xMove: 0,
   },
