@@ -5,12 +5,16 @@ import { Section, Container } from "@/components/Section";
 import VideoEmbed from "@/components/VideoEmbed";
 import SponsorGrid from "@/components/SponsorGrid";
 import About from "@/components/About";
+import HeroMotion from "@/components/HeroMotion";
+import AboutReveal from "@/components/AboutReveal";
+import GalleryMasonry from "@/components/GalleryMasonry";
+import NameAndGallery from "@/components/NameAndGallery";
 
 export default function Home() {
   return (
     <>
-      <Hero />
-      <About />
+      <HeroMotion />
+      <NameAndGallery />
 
       <Section>
         <Container>
