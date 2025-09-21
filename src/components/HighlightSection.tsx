@@ -21,6 +21,11 @@ const Subtitle = styled.p`
   font-size: 1.5rem;
   line-height: 1.6;
   color: #444;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
 `;
 
 export default function HighlightSection() {

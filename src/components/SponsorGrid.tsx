@@ -40,6 +40,11 @@ const Content = styled.div`
     line-height: 1.6;
     color: #444;
     margin-bottom: 2rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
   }
 `;
 
