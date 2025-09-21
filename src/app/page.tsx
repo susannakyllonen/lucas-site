@@ -1,14 +1,12 @@
 "use client";
 
-import Hero from "@/components/Hero";
-import { Section, Container } from "@/components/Section";
-import VideoEmbed from "@/components/VideoEmbed";
 import SponsorGrid from "@/components/SponsorGrid";
 import About from "@/components/About";
 import HeroMotion from "@/components/HeroMotion";
-import AboutReveal from "@/components/AboutReveal";
-import GalleryMasonry from "@/components/GalleryMasonry";
 import NameAndGallery from "@/components/NameAndGallery";
+import HighlightSection from "@/components/HighlightSection";
+import SupportLucas from "@/components/SupportLucas";
+import { Container, Section } from "@/components/Section";
 
 export default function Home() {
   return (
@@ -16,20 +14,14 @@ export default function Home() {
       <HeroMotion />
       <About />
       <NameAndGallery />
-
       <Section>
         <Container>
-          <h2>Yhteistyökumppanit</h2>
-          <SponsorGrid />
+          <HighlightSection />
         </Container>
       </Section>
 
-      <Section>
-        <Container>
-          <h2>Highlights</h2>
-          <VideoEmbed />
-        </Container>
-      </Section>
+      <SupportLucas />
+      <SponsorGrid />
     </>
   );
 }

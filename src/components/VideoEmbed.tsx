@@ -1,4 +1,3 @@
-// components/VideoEmbed.tsx
 export default function VideoEmbed() {
   return (
     <div

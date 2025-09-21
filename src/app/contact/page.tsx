@@ -17,7 +17,7 @@ const Heading = styled.h1`
 `;
 
 const Subheading = styled.p`
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   text-align: center;
   color: #555;
   margin-bottom: 2.5rem;
