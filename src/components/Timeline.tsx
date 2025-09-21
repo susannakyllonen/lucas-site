@@ -32,7 +32,7 @@ const Dot = styled.div<{ $active: boolean }>`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: ${({ $active }) => ($active ? "#ff4e9b" : "#ccc")};
+  background: ${({ $active }) => ($active ? "#1139ec" : "#ccc")};
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

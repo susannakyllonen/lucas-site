@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import Header from "./Header";
 
 const Wrap = styled.section`
   position: relative;
@@ -22,41 +23,6 @@ const Overlay = styled.div`
     rgba(0, 0, 0, 0.55)
   );
   z-index: 1;
-`;
-
-const Nav = styled.nav`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 88px;
-  display: flex;
-  align-items: center;
-  padding: 0 6vw;
-  z-index: 2;
-
-  a {
-    color: #fff;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: clamp(14px, 1.2vw, 18px);
-    text-decoration: none;
-    margin-right: 32px;
-    transition: opacity 0.2s ease;
-  }
-  a:hover {
-    opacity: 0.85;
-  }
-
-  @media (max-width: 600px) {
-    justify-content: center;
-    width: 100%;
-    padding: 0;
-    a {
-      margin-right: 20px;
-      font-size: 14px;
-    }
-  }
 `;
 
 export default function HeroMotion() {
@@ -85,7 +51,7 @@ export default function HeroMotion() {
 
   return (
     <Wrap ref={heroRef}>
-      {/* Tausta */}
+      <Header transparent />
       <motion.div
         initial={entry}
         animate={entered}
@@ -137,13 +103,6 @@ export default function HeroMotion() {
           </span>
         </motion.h1>
       </motion.div>
-
-      {/* Navigaatio */}
-      <Nav>
-        <Link href="/career">Ura</Link>
-        <Link href="/media">Media</Link>
-        <Link href="/contact">Yhteys</Link>
-      </Nav>
     </Wrap>
   );
 }
