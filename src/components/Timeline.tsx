@@ -10,7 +10,7 @@ const TimelineWrapper = styled.section`
 `;
 
 const TimelineTitle = styled.h2`
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-family: "Satoshi", sans-serif;
   font-weight: 500;
   margin-bottom: 8rem;
@@ -60,7 +60,7 @@ const Description = styled.p`
 
 const ArrowControl = styled.button`
   position: absolute;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -140,7 +140,7 @@ export default function Timeline() {
 
   return (
     <TimelineWrapper>
-      <TimelineTitle>Ura aikajanalla</TimelineTitle>
+      <TimelineTitle>Lucaksen matka</TimelineTitle>
       {index > 0 && <LeftArrow onClick={handlePrev}>←</LeftArrow>}
       <RightArrow onClick={handleNext}>→</RightArrow>
 
