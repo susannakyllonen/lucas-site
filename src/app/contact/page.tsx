@@ -3,11 +3,41 @@
 import Header from "@/components/Header";
 import { useState } from "react";
 import styled from "styled-components";
+import Image from "next/image";
 
-const PageWrapper = styled.div`
-  padding: calc(88px + 4rem) 2rem 6rem;
-  max-width: 720px;
-  margin: 0 auto;
+const Layout = styled.div`
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center; /* lomake keskelle pystysuunnassa */
+  justify-content: center; /* lomake keskelle vaakasuunnassa */
+  padding: calc(88px + 2rem) 2rem 2rem;
+  overflow: hidden;
+`;
+
+const LeftImage = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 40%; /* leveys, esim. 40 % ruudusta */
+  z-index: 0;
+
+  img {
+    object-fit: cover;
+    object-position: left center; /* pysyy vasemmassa reunassa */
+  }
+
+  @media (max-width: 1600px) {
+    display: none;
+  }
+`;
+
+const RightContent = styled.div`
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  width: 100%;
 `;
 
 const Heading = styled.h1`
@@ -98,25 +128,31 @@ export default function ContactPage() {
   }
 
   return (
-    <PageWrapper>
-      <Header />
-      <Heading>Ota yhteyttä</Heading>
-      <Subheading>
-        Jos haluat jutella yhteistyöstä, mediasta tai futiksesta yleensä, jätä
-        viesti alle. Luen kaikki viestit ja vastaan niin pian kuin voin.
-      </Subheading>
+    <Layout>
+      <LeftImage>
+        <Image src="/form-tausta.png" alt="Lucas" fill priority />
+      </LeftImage>
 
-      <Form onSubmit={handleSubmit}>
-        <Input type="text" placeholder="Nimi" required />
-        <Input type="email" placeholder="Sähköposti" required />
-        <TextArea placeholder="Viesti" required />
-        <SubmitButton type="submit">Lähetä</SubmitButton>
-        {sent && (
-          <SuccessMessage>
-            🎉 Viesti lähetetty onnistuneesti! Palaan pian asiaan.
-          </SuccessMessage>
-        )}
-      </Form>
-    </PageWrapper>
+      <RightContent>
+        <Header />
+        <Heading>Ota yhteyttä</Heading>
+        <Subheading>
+          Jos haluat jutella yhteistyöstä, mediasta tai futiksesta yleensä, jätä
+          viesti alle. Luen kaikki viestit ja vastaan niin pian kuin voin.
+        </Subheading>
+
+        <Form onSubmit={handleSubmit}>
+          <Input type="text" placeholder="Nimi" required />
+          <Input type="email" placeholder="Sähköposti" required />
+          <TextArea placeholder="Viesti" required />
+          <SubmitButton type="submit">Lähetä</SubmitButton>
+          {sent && (
+            <SuccessMessage>
+              🎉 Viesti lähetetty onnistuneesti! Palaan pian asiaan.
+            </SuccessMessage>
+          )}
+        </Form>
+      </RightContent>
+    </Layout>
   );
 }
