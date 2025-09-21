@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Timeline from "@/components/Timeline";
+import { AnimatedSection } from "@/components/AnimatedSection";
 
 const Section = styled.section`
   padding: 6rem 2rem;
@@ -55,7 +56,7 @@ const IntroSubheading = styled.p`
   }
 `;
 
-const Grid = styled.div<{ reverse?: boolean }>`
+const Grid = styled.div<{ $reverse?: boolean }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
@@ -67,8 +68,8 @@ const Grid = styled.div<{ reverse?: boolean }>`
     grid-template-columns: 1fr;
   }
 
-  ${({ reverse }) =>
-    reverse &&
+  ${({ $reverse }) =>
+    $reverse &&
     `
     @media (min-width: 769px) {
       direction: rtl;
@@ -113,7 +114,7 @@ const SectionBlock = ({ image, title, text, reverse }: BlockProps) => {
 
   return (
     <Section>
-      <Grid reverse={reverse}>
+      <Grid $reverse={reverse}>
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
@@ -142,21 +143,21 @@ export default function CareerPage() {
   return (
     <>
       <Header />
-
-      <IntroSection>
-        <IntroHeading>
-          Olen Lucas, jalkapallo on ollut osa minua aina.
-        </IntroHeading>
-        <IntroSubheading>
-          Jo yksivuotiaana nukuin pinnasängyssäni jalkapallo kainalossa, ja
-          viiden vuoden iässä aloitin ensimmäiset treenini. Kenttä on ollut
-          siitä asti kotini – paikka, jossa opin kurinalaisuutta, rohkeutta ja
-          unelmien tavoittelua. Tänään tavoittelen matkaa ammattilaiseksi.
-          Jokainen peli, jokainen treeni ja jokainen hetki pallon kanssa vie
-          minua askeleen lähemmäs sitä.
-        </IntroSubheading>
-      </IntroSection>
-
+      <AnimatedSection noMargin>
+        <IntroSection>
+          <IntroHeading>
+            Olen Lucas, jalkapallo on ollut osa minua aina.
+          </IntroHeading>
+          <IntroSubheading>
+            Jo yksivuotiaana nukuin pinnasängyssäni jalkapallo kainalossa, ja
+            viiden vuoden iässä aloitin ensimmäiset treenini. Kenttä on ollut
+            siitä asti kotini – paikka, jossa opin kurinalaisuutta, rohkeutta ja
+            unelmien tavoittelua. Tänään tavoittelen matkaa ammattilaiseksi.
+            Jokainen peli, jokainen treeni ja jokainen hetki pallon kanssa vie
+            minua askeleen lähemmäs sitä.
+          </IntroSubheading>
+        </IntroSection>
+      </AnimatedSection>
       <SectionBlock
         image="/1.png"
         title="Ensiaskeleet"
