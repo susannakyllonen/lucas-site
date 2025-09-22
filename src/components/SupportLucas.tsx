@@ -4,30 +4,39 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-const SupportWrapper = styled.section`
+type SupportProps = {
+  variant?: "full" | "strip";
+};
+
+const Wrapper = styled.section<{ $variant: "full" | "strip" }>`
   position: relative;
-  padding: 6rem 2rem;
-  background: linear-gradient(135deg, #f0f4ff, #e0e8ff);
+  padding: ${({ $variant }) =>
+    $variant === "full" ? "6rem 2rem" : "2rem 1rem"};
+  background: ${({ $variant }) =>
+    $variant === "full"
+      ? "linear-gradient(135deg, #f0f4ff, #e0e8ff)"
+      : "linear-gradient(90deg, #1139ec, #ff66b5)"};
+  color: ${({ $variant }) => ($variant === "strip" ? "#fff" : "#000")};
   overflow: hidden;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
 
   @media (max-width: 768px) {
-    padding: 4rem 1.5rem;
+    padding: ${({ $variant }) =>
+      $variant === "full" ? "4rem 1.5rem" : "1.5rem"};
   }
 `;
 
 const Content = styled(motion.div)`
-  max-width: 900px;
+  max-width: 700px;
   margin: 0 auto;
   text-align: center;
 `;
 
-const Title = styled.h2`
+const Title = styled.h2<{ $variant: "full" | "strip" }>`
   font-family: "Satoshi", sans-serif;
-  font-size: clamp(2.5rem, 6vw, 3.5rem);
-  margin-bottom: 1rem;
-  color: #1139ec;
+  font-size: ${({ $variant }) =>
+    $variant === "full" ? "clamp(2.5rem, 6vw, 3.5rem)" : "1.4rem"};
+  margin-bottom: ${({ $variant }) => ($variant === "full" ? "1rem" : "0")};
+  color: ${({ $variant }) => ($variant === "full" ? "#1139ec" : "#fff")};
 `;
 
 const Subtitle = styled.p`
@@ -43,11 +52,13 @@ const Subtitle = styled.p`
   }
 `;
 
-const CoffeeButton = styled(motion.a)`
+const Button = styled(motion.a)<{ $variant: "full" | "strip" }>`
   display: inline-block;
-  padding: 0.75rem 2rem;
-  background-color: #1139ec;
-  color: #fff;
+  padding: ${({ $variant }) =>
+    $variant === "full" ? "0.75rem 2rem" : "0.4rem 1.2rem"};
+  background-color: ${({ $variant }) =>
+    $variant === "full" ? "#1139ec" : "#fff"};
+  color: ${({ $variant }) => ($variant === "full" ? "#fff" : "#1139ec")};
   border-radius: 12px;
   font-family: "Satoshi", sans-serif;
   font-weight: 600;
@@ -58,27 +69,39 @@ const CoffeeButton = styled(motion.a)`
 
   &:hover {
     transform: translateY(-2px);
-    background-color: #0d2fc5;
+    background-color: ${({ $variant }) =>
+      $variant === "full" ? "#0d2fc5" : "#f0f0f0"};
   }
 `;
 
-export default function SupportLucasSection() {
+export default function SupportLucasSection({
+  variant = "full",
+}: SupportProps) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.25 });
 
   return (
-    <SupportWrapper>
+    <Wrapper $variant={variant}>
       <Content
         ref={ref}
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
       >
-        <Title>Tarjoa Lucakselle energiajuoma</Title>
-        <Subtitle>
-          Haluatko tukea Lucaksen matkaa pelikentillä? Pieni ele, iso merkitys —
-          kiitos, että olet mukana!
-        </Subtitle>
-        <CoffeeButton
+        <Title $variant={variant}>
+          {variant === "full"
+            ? "Tarjoa Lucakselle energiajuoma🥤"
+            : "Tue Lucaksen matkaa ⚽"}
+        </Title>
+
+        {variant === "full" && (
+          <Subtitle>
+            Haluatko tukea Lucaksen matkaa pelikentillä? Pieni ele, iso
+            merkitys. Kiitos, että olet mukana!
+          </Subtitle>
+        )}
+
+        <Button
+          $variant={variant}
           href="https://mobilepay.fi/fi-fi/Pages/Send.aspx?phone=358401234567&amount=5"
           target="_blank"
           rel="noopener noreferrer"
@@ -86,8 +109,8 @@ export default function SupportLucasSection() {
           whileTap={{ scale: 0.95 }}
         >
           Tue MobilePaylla
-        </CoffeeButton>
+        </Button>
       </Content>
-    </SupportWrapper>
+    </Wrapper>
   );
 }

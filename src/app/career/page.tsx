@@ -5,12 +5,12 @@ import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
 import Image from "next/image";
 import Header from "@/components/Header";
-import Timeline from "@/components/Timeline";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import LucasHistory from "@/components/LucasHistory";
+import SeasonStatsTable, { SeasonStat } from "@/components/SeasonStatsTable";
 
 const Section = styled.section`
   padding: 6rem 2rem;
-  border-bottom: 1px solid #000;
 
   @media (max-width: 768px) {
     padding: 3rem 1.5rem;
@@ -108,7 +108,45 @@ interface BlockProps {
   reverse?: boolean;
 }
 
-// SectionBlockissa EI enää IntroSectionia
+const season2024Stats: SeasonStat[] = [
+  {
+    competition: "Ykkösliiga",
+    club: "SJK II",
+    matches: 14,
+    goals: 0,
+    minutes: 479,
+    yellowCards: 5,
+    redCards: 0,
+  },
+  {
+    competition: "Kakkonen - Lohko C",
+    club: "SJK III",
+    matches: 8,
+    goals: 1,
+    minutes: 571,
+    yellowCards: 0,
+    redCards: 0,
+  },
+  {
+    competition: "Suomen Cup",
+    club: "SJK II",
+    matches: 1,
+    goals: 0,
+    minutes: 45,
+    yellowCards: 0,
+    redCards: 0,
+  },
+  {
+    competition: "Ykkösliigacup",
+    club: "SJK II",
+    matches: 1,
+    goals: 0,
+    minutes: 45,
+    yellowCards: 0,
+    redCards: 0,
+  },
+];
+
 const SectionBlock = ({ image, title, text, reverse }: BlockProps) => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
@@ -120,7 +158,7 @@ const SectionBlock = ({ image, title, text, reverse }: BlockProps) => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          style={{ position: "relative", width: "100%", height: "300px" }} // korkeus säätyy
+          style={{ position: "relative", width: "100%", height: "350px" }} // korkeus säätyy
         >
           <Image src={image} alt={title} fill style={{ objectFit: "cover" }} />
         </motion.div>
@@ -138,7 +176,6 @@ const SectionBlock = ({ image, title, text, reverse }: BlockProps) => {
   );
 };
 
-// CareerPage näyttää introssa Lucaksen tarinan vain kerran
 export default function CareerPage() {
   return (
     <>
@@ -146,10 +183,10 @@ export default function CareerPage() {
       <AnimatedSection noMargin>
         <IntroSection>
           <IntroHeading>
-            Olen Lucas, jalkapallo on ollut osa minua aina.
+            Olen Lucas ja jalkapallo on ollut osa minua aina.
           </IntroHeading>
           <IntroSubheading>
-            Jo yksivuotiaana nukuin pinnasängyssäni jalkapallo kainalossa, ja
+            Jo yksivuotiaana nukuin pinnasängyssäni jalkapallo kainalossa ja
             viiden vuoden iässä aloitin ensimmäiset treenini. Kenttä on ollut
             siitä asti kotini – paikka, jossa opin kurinalaisuutta, rohkeutta ja
             unelmien tavoittelua. Tänään tavoittelen matkaa ammattilaiseksi.
@@ -158,28 +195,29 @@ export default function CareerPage() {
           </IntroSubheading>
         </IntroSection>
       </AnimatedSection>
+      <Section>
+        <Stats>
+          <div>13+ vuotta jalkapalloa</div>
+          <div>100+ virallista ottelua</div>
+          <div>300+ treeniä vuodessa</div>
+          <div>Suomen U16 maajoukkuepelaaja</div>
+        </Stats>
+      </Section>
       <SectionBlock
-        image="/1.png"
+        image="/pallo.png"
         title="Ensiaskeleet"
         text="Lucas tarttui palloon jo ennen kuin oppi puhumaan – yksivuotiaana hän nukkui pinnasängyssä jalkapallo kainalossa. Viisivuotiaana hän aloitti seurassa pelaamisen, ja siitä asti kenttä on ollut hänen toinen kotinsa."
       />
 
       <SectionBlock
-        image="/2.png"
+        image="/tps.png"
         title="Harjoittelu ja kehitys"
         text="Vuodet ovat tuoneet tuhansia toistoja, treenikertoja ja otteluita. Lucas on tunnettu sitkeydestään, kovasta työmoraalistaan ja halustaan oppia joka päivä uutta. Jokainen harjoitus vie häntä askeleen lähemmäksi ammattilaisuutta."
         reverse
       />
 
-      <Section>
-        <Stats>
-          <div>5+ vuotta peliuraa</div>
-          <div>300+ treeniä vuodessa</div>
-          <div>100+ ottelua</div>
-        </Stats>
-      </Section>
-
-      <Timeline />
+      <LucasHistory />
+      <SeasonStatsTable season="2024–25" stats={season2024Stats} />
     </>
   );
 }

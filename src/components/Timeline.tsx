@@ -3,6 +3,16 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+export interface TimelineItem {
+  label: string; // esim. vuosi
+  description: string; // kuvaus
+}
+
+interface TimelineProps {
+  title?: string; // otsikko (esim. "Lucaksen matka")
+  items: TimelineItem[]; // data syötetään propsina
+}
+
 const TimelineWrapper = styled.section`
   padding: 9rem 2rem 15rem;
   background: #fff;
@@ -96,57 +106,26 @@ const YearLabel = styled.div`
   white-space: nowrap;
 `;
 
-const timelineData = [
-  {
-    label: "2006",
-    description: "Synnyin Turussa",
-  },
-  {
-    label: "2019",
-    description: "Italia",
-  },
-  {
-    label: "2021",
-    description: "TPS",
-  },
-  {
-    label: "2023",
-    description: "SJK",
-  },
-  {
-    label: "2025",
-    description: "SJK Akatemia",
-  },
-  {
-    label: "Now",
-    description: "You are here. The story continues.",
-  },
-];
-
-export default function Timeline() {
+export default function Timeline({ title = "Timeline", items }: TimelineProps) {
   const [index, setIndex] = useState(0);
 
   const handleNext = () => {
-    if (index < timelineData.length - 1) {
-      setIndex(index + 1);
-    }
+    if (index < items.length - 1) setIndex(index + 1);
   };
 
   const handlePrev = () => {
-    if (index > 0) {
-      setIndex(index - 1);
-    }
+    if (index > 0) setIndex(index - 1);
   };
 
   return (
     <TimelineWrapper>
-      <TimelineTitle>Lucaksen matka</TimelineTitle>
+      <TimelineTitle>{title}</TimelineTitle>
       {index > 0 && <LeftArrow onClick={handlePrev}>←</LeftArrow>}
       <RightArrow onClick={handleNext}>→</RightArrow>
 
       <Line>
-        {timelineData.map((item, i) => {
-          const left = `${(i / (timelineData.length - 1)) * 100}%`;
+        {items.map((item, i) => {
+          const left = `${(i / (items.length - 1)) * 100}%`;
           return (
             <div
               key={i}
@@ -166,7 +145,7 @@ export default function Timeline() {
             </div>
           );
         })}
-        <Description>{timelineData[index].description}</Description>
+        <Description>{items[index].description}</Description>
       </Line>
     </TimelineWrapper>
   );
