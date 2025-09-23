@@ -26,9 +26,13 @@ interface SeasonStatsTableProps {
 }
 
 const Section = styled.section`
-  padding: 6rem 2rem;
+  padding: 10rem 2rem;
   background: #fff;
   width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 3rem 2rem;
+  }
 `;
 
 const HeadingWrapper = styled.div`
@@ -49,6 +53,10 @@ const BackgroundText = styled.span`
   z-index: 0;
   pointer-events: none;
   user-select: none;
+
+  @media (max-width: 768px) {
+    font-size: 25vw;
+  }
 `;
 
 const Heading = styled.h2`
@@ -58,6 +66,15 @@ const Heading = styled.h2`
   font-weight: 600;
   color: #000;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    font-size: 10vw;
+  }
+`;
+
+const TableContainer = styled.div`
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 `;
 
 const Table = styled.table`
@@ -65,13 +82,14 @@ const Table = styled.table`
   border-collapse: collapse;
   font-family: "Satoshi", sans-serif;
   margin: 0 auto;
-  max-width: 1200px;
+  min-width: 700px; /* pakottaa scrollaamaan kapeilla näytöillä */
 
   th,
   td {
     padding: 1rem;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    white-space: nowrap;
   }
 
   th {
@@ -105,44 +123,45 @@ const SeasonStatsTable: React.FC<SeasonStatsTableProps> = ({
         <BackgroundText>23/25</BackgroundText>
         <Heading>Tilastot</Heading>
       </HeadingWrapper>
-
-      <Table>
-        <thead>
-          <tr>
-            <th>Kilpailu</th>
-            <th>Klubi</th>
-            <th>Ottelut</th>
-            <th>Maalit</th>
-            <th>Minuutit</th>
-            <th>Varoitukset</th>
-            <th>Punaiset</th>
-          </tr>
-        </thead>
-        <tbody>
-          {stats.map((s, i) => (
-            <tr key={i}>
-              <td>{s.competition}</td>
-              <td>{s.club}</td>
-              <td>{s.matches}</td>
-              <td>{s.goals ?? "-"}</td>
-              <td>{s.minutes}</td>
-              <td>{s.yellowCards ?? "-"}</td>
-              <td>{s.redCards ?? "-"}</td>
+      <TableContainer>
+        <Table>
+          <thead>
+            <tr>
+              <th>Kilpailu</th>
+              <th>Klubi</th>
+              <th>Ottelut</th>
+              <th>Maalit</th>
+              <th>Minuutit</th>
+              <th>Varoitukset</th>
+              <th>Punaiset</th>
             </tr>
-          ))}
-          {total && (
-            <tr className="total-row">
-              <td>Yhteensä</td>
-              <td>-</td>
-              <td>{total.matches}</td>
-              <td>{total.goals ?? "-"}</td>
-              <td>{total.minutes}</td>
-              <td>{total.yellowCards ?? "-"}</td>
-              <td>{total.redCards ?? "-"}</td>
-            </tr>
-          )}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {stats.map((s, i) => (
+              <tr key={i}>
+                <td>{s.competition}</td>
+                <td>{s.club}</td>
+                <td>{s.matches}</td>
+                <td>{s.goals ?? "-"}</td>
+                <td>{s.minutes}</td>
+                <td>{s.yellowCards ?? "-"}</td>
+                <td>{s.redCards ?? "-"}</td>
+              </tr>
+            ))}
+            {total && (
+              <tr className="total-row">
+                <td>Yhteensä</td>
+                <td>-</td>
+                <td>{total.matches}</td>
+                <td>{total.goals ?? "-"}</td>
+                <td>{total.minutes}</td>
+                <td>{total.yellowCards ?? "-"}</td>
+                <td>{total.redCards ?? "-"}</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </TableContainer>
     </Section>
   );
 };

@@ -23,6 +23,10 @@ const lucasHistory: TimelineItem[] = [
       "TPS juniorit (Finland) – pelasi koko junioriuransa Turun Palloseurassa.",
   },
   {
+    label: "2021",
+    description: "Suomen U16 maajoukkue – debyytti Suomen paidassa.",
+  },
+  {
     label: "2022–2023",
     description: "TPS U19 (Finland) – nousi seuran U19-joukkueeseen.",
   },
@@ -43,10 +47,6 @@ const lucasHistory: TimelineItem[] = [
   {
     label: "2025–",
     description: "SJK II (Finland) – mukana seuran kakkosjoukkueessa.",
-  },
-  {
-    label: "2023",
-    description: "Suomen U16 maajoukkue – debyytti Suomen paidassa.",
   },
 ];
 
