@@ -31,10 +31,10 @@ const Subtitle = styled.p`
 export default function HighlightSection() {
   return (
     <Wrapper>
-      <Title>Highlight-video</Title>
+      <Title>Kauden paras maali</Title>
       <Subtitle>
-        Kooste Lucaksen peleistä ja hetkistä kentällä. Tämä video näyttää, miksi
-        intohimo jalkapalloon on ollut mukana jo lapsesta asti.
+        Ottelussa KäPaa vastaan Lucas tekee maalin, joka valittiin koko kauden
+        parhaaksi.
       </Subtitle>
       <VideoEmbed />
     </Wrapper>

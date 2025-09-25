@@ -113,7 +113,6 @@ const Table = styled.table`
 `;
 
 const SeasonStatsTable: React.FC<SeasonStatsTableProps> = ({
-  season,
   stats,
   total,
 }) => {

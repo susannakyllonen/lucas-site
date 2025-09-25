@@ -28,25 +28,22 @@ const lucasHistory: TimelineItem[] = [
   },
   {
     label: "2022–2023",
-    description: "TPS U19 (Finland) – nousi seuran U19-joukkueeseen.",
-  },
-  {
-    label: "2023–2024",
     description:
-      "Genoa U17 (Italy) – pelasi Italiassa Genoan akatemiajoukkueessa.",
+      "Genoa U17 (Italy) – siirtyi Italiaan pelaamaan Genoan akatemiajoukkueeseen.",
   },
   {
-    label: "2023–2024",
-    description: "Turun II (Finland) – palasi Suomeen Turun joukkueeseen.",
+    label: "2023",
+    description: "Palasi Suomeen ja jatkoi pelejä TPS:ssä.",
   },
   {
-    label: "2024–2025",
+    label: "2024",
     description:
-      "SJK III (Finland) – liittyi Seinäjoen Jalkapallokerhon riveihin.",
+      "SJK III ja SJK II (Finland) – liittyi Seinäjoen Jalkapallokerhon riveihin.",
   },
   {
     label: "2025–",
-    description: "SJK II (Finland) – mukana seuran kakkosjoukkueessa.",
+    description:
+      "SJK II & SJK III (Finland) – siirtyi Seinäjoen Jalkapallokerhoon ja on pelannut eniten pelejä kakkosjoukkueessa.",
   },
 ];
 

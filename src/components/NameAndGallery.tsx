@@ -240,7 +240,7 @@ export default function NameAndGallery() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.8 }}
         >
-          <Link href="#minusta" className="btn">
+          <Link href="/career" className="btn">
             Minusta
           </Link>
         </MinustaWrap>

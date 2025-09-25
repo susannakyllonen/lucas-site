@@ -101,6 +101,16 @@ const Stats = styled.div`
   }
 `;
 
+const StatsWrapper = styled.section`
+  padding: 6rem 2rem;
+  border-bottom: 1px solid #000;
+  background: #fff;
+
+  @media (max-width: 768px) {
+    padding: 3rem 1.5rem;
+  }
+`;
+
 interface BlockProps {
   image: string;
   title: string;
@@ -186,27 +196,29 @@ export default function CareerPage() {
             Olen Lucas ja jalkapallo on ollut osa minua aina.
           </IntroHeading>
           <IntroSubheading>
-            Jo yksivuotiaana nukuin pinnasängyssäni jalkapallo kainalossa ja
-            viiden vuoden iässä aloitin ensimmäiset treenini. Kenttä on ollut
-            siitä asti kotini – paikka, jossa opin kurinalaisuutta, rohkeutta ja
-            unelmien tavoittelua. Tänään tavoittelen matkaa ammattilaiseksi.
-            Jokainen peli, jokainen treeni ja jokainen hetki pallon kanssa vie
-            minua askeleen lähemmäs sitä.
+            Jo yksivuotiaana nukuin pinnasängyssä pallo kainalossa ja viiden
+            vuoden iässä aloitin ensimmäiset treenit. Kenttä on ollut siitä asti
+            kotini – paikka, jossa opin kurinalaisuutta, rohkeutta ja unelmien
+            tavoittelua. Tänään tavoittelen matkaa ammattilaiseksi. Jokainen
+            peli, jokainen treeni ja jokainen hetki pallon kanssa vie minua
+            askeleen lähemmäs sitä.
           </IntroSubheading>
         </IntroSection>
       </AnimatedSection>
-      <Section>
+
+      <StatsWrapper>
         <Stats>
           <div>13+ vuotta jalkapalloa</div>
           <div>100+ virallista ottelua</div>
           <div>300+ treeniä vuodessa</div>
           <div>Suomen U16 maajoukkuepelaaja</div>
         </Stats>
-      </Section>
+      </StatsWrapper>
+
       <SectionBlock
         image="/pallo.png"
         title="Ensiaskeleet"
-        text="Lucas tarttui palloon jo ennen kuin oppi puhumaan – yksivuotiaana hän nukkui pinnasängyssä jalkapallo kainalossa. Viisivuotiaana hän aloitti seurassa pelaamisen, ja siitä asti kenttä on ollut hänen toinen kotinsa."
+        text="Lucas tarttui palloon jo ennen kuin oppi puhumaan – yksivuotiaana hän nukkui pinnasängyssä jalkapallo kainalossa. Viisivuotiaana hän aloitti seurassa pelaamisen ja siitä asti kenttä on ollut hänen toinen kotinsa."
       />
 
       <SectionBlock

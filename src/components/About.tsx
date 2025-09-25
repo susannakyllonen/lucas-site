@@ -42,9 +42,12 @@ export default function AboutSusannaStyle() {
       <Container>
         <Intro>Olen Lucas Kyllönen</Intro>
         <BodyText>
-          Lucas Kyllönen on nuori ja määrätietoinen hyökkääjä, joka tunnetaan
-          nopeudestaan ja maalintekotaidostaan. Hän pelaa tällä hetkellä [seuran
-          nimi] riveissä ja tavoittelee uraa ammattilaiskentillä.
+          Pelaan keskikentällä SJK Akatemiassa. Minulle tärkeintä kentällä on
+          pelin lukeminen ja se, että pystyn auttamaan joukkuetta oikealla
+          hetkellä. Olen todella määrätietoinen ja kunnianhimoinen – haluan
+          jatkuvasti oppia ja mennä eteenpäin. Kentän ulkopuolella olen
+          sosiaalinen ja helposti lähestyttävä, tulen hyvin toimeen kaikkien
+          kanssa ja uskon, että hyvä joukkuehenki syntyy juuri siitä.
         </BodyText>
       </Container>
     </Section>

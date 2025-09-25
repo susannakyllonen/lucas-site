@@ -19,13 +19,14 @@ const TimelineWrapper = styled.section`
 `;
 
 const TimelineTitle = styled.h2`
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  position: relative;
   font-family: "Satoshi", sans-serif;
-  font-weight: 500;
-  margin-bottom: 4rem;
-  text-align: left;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 600;
+  color: #000;
   max-width: 1200px;
   margin: 0 auto 7rem;
+  text-align: center;
 
   @media (max-width: 768px) {
     margin: 0 auto 4rem;
