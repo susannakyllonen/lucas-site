@@ -1,31 +1,36 @@
-"use client";
-
-import { ThemeProvider, createGlobalStyle } from "styled-components";
-import { theme } from "@/styles/theme";
-import "@/styles/globals.css";
+import ClientRoot from "../components/ClientRoot";
 import { Inter } from "next/font/google";
-import { Footer } from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
-const Global = createGlobalStyle`
-  :root {
-    /* voit käyttää näitä suoraan komponenteissa: font-family: var(--font-playfair) */
-  }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: ${({ theme }) => theme.colors.bg};
-    color: ${({ theme }) => theme.colors.text};
-    font-family: var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  }
-  h1, h2, h3 {
-    font-family: var(--font-playfair), serif;
-  }
-  a { text-decoration: none; color: inherit; }
-`;
+export const metadata = {
+  title: "Lucas Kyllönen",
+  description: "Official website of football player Lucas Kyllönen",
+  icons: {
+    icon: "/Lucas-logo.png",
+    shortcut: "/Lucas-logo.png",
+    apple: "/Lucas-logo.png",
+  },
+  openGraph: {
+    title: "Lucas Kyllönen ⚽️",
+    description: "Finnish football player – official website",
+    url: "https://lucaskyllonen.com",
+    siteName: "Lucas Kyllönen",
+    images: [
+      {
+        url: "/header-lucas.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Lucas Kyllönen on the field",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -33,20 +38,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fi" className={`${inter.variable}`}>
-      <head>
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="fi" className={inter.variable}>
       <body>
-        <ThemeProvider theme={theme}>
-          <Global />
-
-          {children}
-          <Footer />
-        </ThemeProvider>
+        <ClientRoot>{children}</ClientRoot>
       </body>
     </html>
   );
