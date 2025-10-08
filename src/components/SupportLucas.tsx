@@ -160,7 +160,10 @@ export default function DonationSplit() {
           whileHover={{ scale: 1.03 }}
           transition={{ type: "spring", stiffness: 200, damping: 12 }}
           onClick={() =>
-            window.open("https://mobilepay.fi/lahjoita/12345", "_blank")
+            window.open(
+              "https://qr.mobilepay.fi/box/d925bd5e-90a9-4fb9-96cb-8d70b26c335c/pay-in",
+              "_blank"
+            )
           }
           style={{ y }}
         >
