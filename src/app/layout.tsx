@@ -10,9 +10,9 @@ export const metadata = {
   title: "Lucas Kyllönen",
   description: "Official website of football player Lucas Kyllönen",
   icons: {
-    icon: "/Lucas-logo.png",
-    shortcut: "/Lucas-logo.png",
-    apple: "/Lucas-logo.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon-96x96.png",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "Lucas Kyllönen ⚽️",
