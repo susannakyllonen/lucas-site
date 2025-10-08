@@ -37,7 +37,7 @@ const Text = styled.p`
   font-size: clamp(1.4rem, 2vw, 1.8rem);
   line-height: 1.5;
   color: #444;
-  margin: 0 auto 3rem;
+  margin: 0 auto 2rem;
   max-width: 780px;
 
   @media (max-width: 768px) {

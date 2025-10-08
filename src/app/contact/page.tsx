@@ -9,10 +9,11 @@ const Layout = styled.div`
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center; /* lomake keskelle pystysuunnassa */
-  justify-content: center; /* lomake keskelle vaakasuunnassa */
+  align-items: center;
+  justify-content: center;
   padding: calc(88px + 2rem) 2rem 2rem;
   overflow: hidden;
+  background: #fff; /* varmistaa ettei kuvan venymistä näy valkeana taustana */
 `;
 
 const LeftImage = styled.div`
@@ -20,12 +21,15 @@ const LeftImage = styled.div`
   left: 0;
   top: 0;
   bottom: 0;
-  width: 40%; /* leveys, esim. 40 % ruudusta */
+  width: 40%;
   z-index: 0;
+  overflow: hidden; /* estää ylimääräisen venymisen */
 
   img {
     object-fit: cover;
-    object-position: left center; /* pysyy vasemmassa reunassa */
+    object-position: center left;
+    width: 100%;
+    height: 100%;
   }
 
   @media (max-width: 1600px) {
