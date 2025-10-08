@@ -33,7 +33,7 @@ export default function HighlightSection() {
     <Wrapper>
       <Title>Kauden paras maali</Title>
       <Subtitle>
-        Ottelussa KäPaa vastaan Lucas tekee maalin, joka valittiin koko kauden
+        Ottelussa KäPaa vastaan tein maalin, joka valittiin koko kauden
         parhaaksi.
       </Subtitle>
       <VideoEmbed />

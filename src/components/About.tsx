@@ -1,6 +1,7 @@
 "use client";
 
 import styled from "styled-components";
+import { AnimatedSection } from "./AnimatedSection";
 
 const Section = styled.section`
   padding: 100px 6vw;
@@ -38,18 +39,20 @@ const BodyText = styled.p`
 
 export default function AboutSusannaStyle() {
   return (
-    <Section>
-      <Container>
-        <Intro>Olen Lucas Kyllönen</Intro>
-        <BodyText>
-          Pelaan keskikentällä SJK Akatemiassa. Minulle tärkeintä kentällä on
-          pelin lukeminen ja se, että pystyn auttamaan joukkuetta oikealla
-          hetkellä. Olen todella määrätietoinen ja kunnianhimoinen – haluan
-          jatkuvasti oppia ja mennä eteenpäin. Kentän ulkopuolella olen
-          sosiaalinen ja helposti lähestyttävä, tulen hyvin toimeen kaikkien
-          kanssa ja uskon, että hyvä joukkuehenki syntyy juuri siitä.
-        </BodyText>
-      </Container>
-    </Section>
+    <AnimatedSection>
+      <Section>
+        <Container>
+          <Intro>Olen Lucas Kyllönen</Intro>
+          <BodyText>
+            Pelaan keskikentällä SJK Akatemiassa. Minulle tärkeintä kentällä on
+            pelin lukeminen ja se, että pystyn auttamaan joukkuetta oikealla
+            hetkellä. Olen todella määrätietoinen ja kunnianhimoinen – haluan
+            jatkuvasti oppia ja mennä eteenpäin. Kentän ulkopuolella olen
+            sosiaalinen ja helposti lähestyttävä, tulen hyvin toimeen kaikkien
+            kanssa ja uskon, että hyvä joukkuehenki syntyy juuri siitä.
+          </BodyText>
+        </Container>
+      </Section>
+    </AnimatedSection>
   );
 }

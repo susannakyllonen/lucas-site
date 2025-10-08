@@ -25,7 +25,7 @@ const TimelineTitle = styled.h2`
   font-weight: 600;
   color: #000;
   max-width: 1200px;
-  margin: 0 auto 7rem;
+  margin: 0 auto 5rem;
   text-align: center;
 
   @media (max-width: 768px) {
@@ -70,45 +70,45 @@ const YearLabel = styled.div`
 `;
 
 const Description = styled.p`
-  font-size: 1.125rem;
+  font-size: 1.3rem; /* vähän isompi fontti */
   font-family: "Satoshi", sans-serif;
   color: #222;
   text-align: center;
-  margin-top: 2.5rem; /* lisää väli otsikon jälkeen */
-  max-width: 650px; /* vähän leveämpi lukutila */
+  margin-top: 4rem;
+  max-width: 700px; /* vähän isompi lukutila */
   margin-left: auto;
   margin-right: auto;
-  line-height: 10; /* rennompi riviväli desktopilla */
+  line-height: 1.7; /* korjattu riviväli */
 
   @media (max-width: 768px) {
-    text-align: left;
-    margin-top: 1.5rem; /* mobiilissa vähän vähemmän tilaa */
-    line-height: 1.7; /* mobiilissa myös väljempi */
+    display: none; /* piilotetaan mobiilissa */
   }
 `;
 
-const ArrowControl = styled.button`
-  position: absolute;
-  top: -5rem;
-  transform: translateY(-50%);
+const Arrows = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: -2rem auto 5rem;
+  /* -2rem nostaa ylemmäs, 3rem antaa tilaa viivaan */
+  position: relative;
+`;
+
+const ArrowControl = styled.button<{ disabled?: boolean }>`
   background: none;
   border: none;
   font-size: 2rem;
-  cursor: pointer;
-  z-index: 10;
-  color: #000;
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+  color: ${({ disabled }) => (disabled ? "#aaa" : "#000")};
   transition: transform 0.3s ease;
 
-  @media (max-width: 768px) {
-    display: none; /* ei nuolia mobiilissa */
+  &:hover {
+    transform: ${({ disabled }) => (disabled ? "none" : "scale(1.2)")};
   }
-`;
 
-const LeftArrow = styled(ArrowControl)`
-  left: 1rem;
-`;
-const RightArrow = styled(ArrowControl)`
-  right: 1rem;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const MobileList = styled.div`
@@ -160,18 +160,19 @@ export default function Timeline({ title = "Timeline", items }: TimelineProps) {
     <TimelineWrapper>
       <TimelineTitle>{title}</TimelineTitle>
 
-      {/* Desktop-versio */}
-      {index > 0 && <LeftArrow onClick={handlePrev}>←</LeftArrow>}
-      {index < items.length - 1 && (
-        <RightArrow onClick={handleNext}>→</RightArrow>
-      )}
+      <Arrows>
+        <ArrowControl onClick={handlePrev} disabled={index === 0}>
+          ←
+        </ArrowControl>
+        <ArrowControl
+          onClick={handleNext}
+          disabled={index === items.length - 1}
+        >
+          →
+        </ArrowControl>
+      </Arrows>
 
       <LineWrapper>
-        {index > 0 && <LeftArrow onClick={handlePrev}>←</LeftArrow>}
-        {index < items.length - 1 && (
-          <RightArrow onClick={handleNext}>→</RightArrow>
-        )}
-
         <Line>
           {items.map((item, i) => {
             const left = `${(i / (items.length - 1)) * 100}%`;
@@ -194,9 +195,10 @@ export default function Timeline({ title = "Timeline", items }: TimelineProps) {
               </div>
             );
           })}
-          <Description>{items[index].description}</Description>
         </Line>
       </LineWrapper>
+
+      <Description>{items[index].description}</Description>
 
       {/* Mobile-versio */}
       <MobileList>

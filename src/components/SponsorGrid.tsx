@@ -1,78 +1,90 @@
 "use client";
 
 import styled from "styled-components";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 type Sponsor = { name: string; logo: string; url: string };
 
 const Section = styled.section`
+  background: #fff;
   padding: 6rem 2rem;
+  border-top: 1px solid #eee;
 
   @media (max-width: 768px) {
-    padding: 3rem 1.5rem;
+    padding: 6rem 1.5rem;
   }
 `;
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
   max-width: 1200px;
   margin: 0 auto;
-  align-items: center;
+  text-align: center;
+`;
+
+const Heading = styled.h2`
+  font-family: "Satoshi", sans-serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  color: #111;
+`;
+
+const Text = styled.p`
+  font-family: "Satoshi", sans-serif;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  line-height: 1.5;
+  color: #444;
+  margin: 0 auto 3rem;
+  max-width: 780px;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Content = styled.div`
-  h2 {
-    font-family: "Satoshi", sans-serif;
-    font-weight: 600;
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 1rem;
-  }
-
-  p {
-    font-family: "Satoshi", sans-serif;
-    font-size: 1.5rem;
-    line-height: 1.6;
-    color: #444;
-    margin-bottom: 2rem;
-
-    @media (max-width: 768px) {
-      font-size: 1.2rem;
-      line-height: 1.5;
-    }
-  }
-`;
-
-const ImageWrap = styled.div`
-  position: relative;
-  width: 100%;
-  height: 400px;
-
-  img {
-    object-fit: cover;
+    font-size: 1.2rem;
   }
 `;
 
 const Grid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 4rem;
+`;
+
+const LogoWrapper = styled(motion.a)`
+  display: block;
 
   img {
-    max-height: 48px;
+    max-height: 54px;
     width: auto;
     filter: grayscale(100%);
-    transition: filter 0.2s ease;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
 
-    &:hover {
-      filter: grayscale(0%);
-    }
+  &:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.08);
+  }
+`;
+
+const CTA = styled(motion.a)`
+  display: inline-block;
+  margin-top: 2rem;
+  font-family: "Satoshi", sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+  color: #111;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: #111;
   }
 `;
 
@@ -84,38 +96,32 @@ export default function SponsorSection({
   return (
     <Section>
       <Wrapper>
-        <ImageWrap>
-          <Image src="/1.png" alt="Lucas Kyllönen" fill priority />
-        </ImageWrap>
+        <Heading>Yhteistyökumppanit</Heading>
+        <Text>
+          Lucas tekee yhteistyötä intohimoisten ja urheilua tukevien brändien
+          kanssa.
+        </Text>
 
-        <Content>
-          <h2>Yhteistyökumppanit</h2>
-          <p>
-            Lucas tekee yhteistyötä intohimoisten ja urheilua tukevien brändien
-            kanssa. Oletko kiinnostunut kumppanuudesta? Tutustu sponsoreihin tai
-            ota yhteyttä.
-          </p>
-
-          {items.length ? (
-            <Grid>
-              {items.map((s) => (
-                <a
-                  key={s.name}
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image src={s.logo} alt={s.name} width={120} height={48} />
-                </a>
-              ))}
-            </Grid>
-          ) : (
-            <p style={{ fontStyle: "italic", color: "#666" }}>
-              Etsimme kauden 2025–26 kumppaneita.{" "}
-              <a href="/contact">Ota yhteyttä →</a>
-            </p>
-          )}
-        </Content>
+        {items.length ? (
+          <Grid>
+            {items.map((s) => (
+              <LogoWrapper
+                key={s.name}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 200, damping: 12 }}
+              >
+                <Image src={s.logo} alt={s.name} width={140} height={60} />
+              </LogoWrapper>
+            ))}
+          </Grid>
+        ) : (
+          <CTA href="/contact">
+            Etsimme kauden 2025–26 yhteistyökumppaneita. Ota yhteyttä →
+          </CTA>
+        )}
       </Wrapper>
     </Section>
   );

@@ -2,6 +2,7 @@
 
 import { AnimatedSection } from "@/components/AnimatedSection";
 import Header from "@/components/Header";
+import VideoEmbed from "@/components/VideoEmbed";
 import Image from "next/image";
 import styled from "styled-components";
 
@@ -84,13 +85,7 @@ export default function MediaPage() {
 
         <AnimatedSection>
           <SectionTitle>Highlight-video</SectionTitle>
-          <VideoWrapper>
-            <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="Highlight video"
-              allowFullScreen
-            />
-          </VideoWrapper>
+          <VideoEmbed />
         </AnimatedSection>
 
         <AnimatedSection>
@@ -126,6 +121,20 @@ export default function MediaPage() {
             <GalleryItem>
               <Image
                 src="/kentta-lucas.jpeg"
+                alt="Ensiaskeleet jalkapallon parissa"
+                fill
+              />
+            </GalleryItem>
+            <GalleryItem>
+              <Image
+                src="/lucas-lentaa.jpg"
+                alt="Ensiaskeleet jalkapallon parissa"
+                fill
+              />
+            </GalleryItem>
+            <GalleryItem>
+              <Image
+                src="/lucas-lentaa1.jpg"
                 alt="Ensiaskeleet jalkapallon parissa"
                 fill
               />

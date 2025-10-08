@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import styled from "styled-components";
 import Image from "next/image";
-import Link from "next/link";
 import Header from "./Header";
 
 const Wrap = styled.section`
@@ -94,8 +93,6 @@ export default function HeroMotion() {
             lineHeight: 0.92,
             fontSize: "clamp(34px, 8.5vw, 130px)", // mobiilissa vähän pienempi min
           }}
-          initial={{ y: 60, opacity: 0 }}
-          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
         >
           <span style={{ display: "block" }}>Lucas</span>
           <span style={{ display: "block", marginTop: "0.06em" }}>
