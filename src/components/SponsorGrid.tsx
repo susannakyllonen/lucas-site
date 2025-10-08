@@ -8,8 +8,7 @@ type Sponsor = { name: string; logo: string; url: string };
 
 const Section = styled.section`
   background: #fff;
-  padding: 6rem 2rem;
-  border-top: 1px solid #eee;
+  padding: 10rem 2rem;
 
   @media (max-width: 768px) {
     padding: 6rem 1.5rem;
@@ -25,11 +24,17 @@ const Wrapper = styled.div`
 const Heading = styled.h2`
   font-family: "Satoshi", sans-serif;
   font-weight: 700;
-  font-size: clamp(3rem, 7vw, 5rem);
-  line-height: 1.1;
+  font-size: clamp(2rem, 5vw, 4.5rem); /* pienemmät arvot */
+  line-height: 1.15;
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
   color: #111;
+
+  @media (max-width: 768px) {
+    font-size: clamp(1.8rem, 6vw, 2.6rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
 `;
 
 const Text = styled.p`

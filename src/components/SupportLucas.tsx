@@ -24,7 +24,7 @@ const Left = styled.div`
 
   @media (max-width: 768px) {
     order: 1;
-    height: 350px;
+    height: 300px; /* hieman pienempi */
   }
 `;
 
@@ -39,7 +39,7 @@ const Right = styled.div`
 
   @media (max-width: 768px) {
     order: 2;
-    padding: 2rem 1rem;
+    padding: 2.5rem 1.5rem 3rem;
     text-align: center;
   }
 `;
@@ -49,16 +49,21 @@ const Content = styled.div`
   margin-bottom: 2rem;
 
   h2 {
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(1.8rem, 5vw, 3rem);
     font-family: "Satoshi", sans-serif;
     font-weight: 700;
     margin-bottom: 1rem;
   }
 
   p {
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 3.8vw, 1.5rem);
     line-height: 1.6;
     color: #333;
+
+    @media (max-width: 480px) {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
   }
 `;
 
@@ -66,22 +71,23 @@ const FloatingButton = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.4rem;
   background: #fff;
   border-radius: 16px;
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 2px solid transparent;
   position: relative;
-  top: 40px;
+  top: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
   &:hover {
     border-color: #007aff;
   }
 
   span {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: #007aff;
     font-family: "Satoshi", sans-serif;
@@ -89,9 +95,14 @@ const FloatingButton = styled(motion.div)`
 
   @media (max-width: 768px) {
     top: 20px;
+    padding: 0.7rem 1rem;
     img {
-      width: 180px;
+      width: 150px;
       height: auto;
+    }
+
+    span {
+      font-size: 0.85rem;
     }
   }
 `;
@@ -103,7 +114,6 @@ export default function DonationSplit() {
     offset: ["start end", "end start"],
   });
 
-  // Heiluminen (siniaalto)
   const y = useTransform(scrollYProgress, [0, 1], [-10, 10]);
 
   return (
@@ -129,19 +139,19 @@ export default function DonationSplit() {
           </p>
         </Content>
 
-        {/* MobilePay-nappi tekstin alla */}
         <FloatingButton
-          whileHover={{ scale: 1.03 }} // pieni kohoaminen hoverilla
+          whileHover={{ scale: 1.03 }}
           transition={{ type: "spring", stiffness: 200, damping: 12 }}
           onClick={() =>
             window.open("https://mobilepay.fi/lahjoita/12345", "_blank")
           }
+          style={{ y }}
         >
           <Image
             src="/MobilePay_logo.svg.png"
             alt="MobilePay QR"
-            width={220}
-            height={120}
+            width={200}
+            height={100}
             priority
           />
           <span>Lahjoita MobilePaylla 💙</span>
