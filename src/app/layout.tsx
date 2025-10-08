@@ -21,7 +21,7 @@ export const metadata = {
     siteName: "Lucas Kyllönen",
     images: [
       {
-        url: "/header-lucas.jpeg",
+        url: "https://lucaskyllonen.com/header-lucas.jpeg",
         width: 1200,
         height: 630,
         alt: "Lucas Kyllönen on the field",
