@@ -128,8 +128,8 @@ export default function DonationSplit() {
 
   // 👇 Tekstit vaihtuvat automaattisesti
   const heading = isEnglish
-    ? "Buy me a virtual coffee ☕"
-    : "Tarjoa virtuaalikokis";
+    ? "Buy me a virtual energy drink ⚡️"
+    : "Tarjoa virtuaalinen energiajuoma ⚡️";
   const paragraph = isEnglish
     ? "Want to support my football journey? Small act, big meaning. Thank you for being part of it!"
     : "Haluatko tukea matkaani pelikentillä? Pieni ele, iso merkitys. Kiitos, että olet mukana!";

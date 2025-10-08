@@ -8,6 +8,10 @@ const Section = styled.section`
   background: ${({ theme }) => theme.colors.bg};
   display: flex;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    padding: 60px 6vw 40px; /* vähemmän tilaa ylhäällä ja alhaalla */
+  }
 `;
 
 const Container = styled.div`
