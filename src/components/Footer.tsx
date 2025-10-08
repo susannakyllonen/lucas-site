@@ -150,7 +150,7 @@ export const Footer = () => {
           ) : (
             <>
               <FooterLink href="/">Etusivu</FooterLink>
-              <FooterLink href="/ura">Ura</FooterLink>
+              <FooterLink href="/career">Ura</FooterLink>
               <FooterLink href="/media">Media</FooterLink>
               <FooterLink href="/contact">Yhteys</FooterLink>
             </>
