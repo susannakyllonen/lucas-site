@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const Nav = styled.header<{ $transparent?: boolean }>`
@@ -65,6 +66,39 @@ const Center = styled.div<{ $transparent?: boolean }>`
   }
 `;
 
+const RightSide = styled.div<{ $transparent?: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 36px; /* aiemmin 16px – nyt reilusti enemmän tilaa */
+
+  @media (max-width: 768px) {
+    gap: 12px;
+    position: absolute;
+    right: 16px;
+    top: 22px;
+  }
+`;
+
+const LanguageSwitch = styled(Link)<{ $transparent?: boolean }>`
+  font-family: "Satoshi", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(13px, 1vw, 15px);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: ${({ $transparent }) => ($transparent ? "#fff" : "#000")};
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+`;
+
 const ContactBtn = styled(Link)<{ $transparent?: boolean }>`
   font-family: "Satoshi", sans-serif;
   font-weight: 600;
@@ -86,8 +120,9 @@ const ContactBtn = styled(Link)<{ $transparent?: boolean }>`
     border-color: #1139ec;
   }
 
+  /* Piilotetaan vain yhteysnappi mobiilissa */
   @media (max-width: 768px) {
-    display: none; /* piilotetaan mobiilissa */
+    display: none;
   }
 `;
 
@@ -100,7 +135,7 @@ const Burger = styled.button<{ $transparent?: boolean }>`
   color: ${({ $transparent }) => ($transparent ? "#fff" : "#000")};
 
   @media (max-width: 768px) {
-    display: block; /* näkyy vain mobiilissa */
+    display: block;
   }
 `;
 
@@ -130,40 +165,69 @@ export default function Header({
   transparent?: boolean;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isEnglish = pathname.startsWith("/en");
+
+  // Luodaan vastaava polku toiselle kielelle
+  const targetLangPath = isEnglish
+    ? pathname.replace("/en", "") || "/"
+    : `/en${pathname}`;
 
   return (
     <Nav $transparent={transparent}>
       {/* vasen: desktop-linkit */}
       <Side $transparent={transparent}>
-        <Link href="/career">Ura</Link>
-        <Link href="/media">Media</Link>
+        <Link href={isEnglish ? "/en/career" : "/career"}>
+          {isEnglish ? "Career" : "Ura"}
+        </Link>
+        <Link href={isEnglish ? "/en/media" : "/media"}>Media</Link>
       </Side>
 
-      {/* vasen mobiilissa → hampurilainen */}
+      {/* mobiilissa hampurilainen */}
       <Burger $transparent={transparent} onClick={() => setMenuOpen(!menuOpen)}>
         ☰
       </Burger>
 
       {/* keskellä nimi */}
       <Center $transparent={transparent}>
-        <Link href="/">Lucas Kyllönen</Link>
+        <Link href={isEnglish ? "/en" : "/"}>Lucas Kyllönen</Link>
       </Center>
 
-      {/* oikealla: yhteys-button (desktopissa vain) */}
-      <ContactBtn href="/contact" $transparent={transparent}>
-        Yhteys
-      </ContactBtn>
+      {/* oikea puoli: kielivalinta + yhteys */}
+      <RightSide $transparent={transparent}>
+        <LanguageSwitch href={targetLangPath} $transparent={transparent}>
+          {isEnglish ? "FI" : "EN"}
+        </LanguageSwitch>
+        <ContactBtn
+          href={isEnglish ? "/en/contact" : "/contact"}
+          $transparent={transparent}
+        >
+          {isEnglish ? "Contact" : "Yhteys"}
+        </ContactBtn>
+      </RightSide>
 
       {/* mobiilivalikko */}
       <MobileMenu open={menuOpen} $transparent={transparent}>
-        <Link href="/career" onClick={() => setMenuOpen(false)}>
-          Ura
+        <Link
+          href={isEnglish ? "/en/career" : "/career"}
+          onClick={() => setMenuOpen(false)}
+        >
+          {isEnglish ? "Career" : "Ura"}
         </Link>
-        <Link href="/media" onClick={() => setMenuOpen(false)}>
+        <Link
+          href={isEnglish ? "/en/media" : "/media"}
+          onClick={() => setMenuOpen(false)}
+        >
           Media
         </Link>
-        <Link href="/contact" onClick={() => setMenuOpen(false)}>
-          Yhteys
+        <Link
+          href={isEnglish ? "/en/contact" : "/contact"}
+          onClick={() => setMenuOpen(false)}
+        >
+          {isEnglish ? "Contact" : "Yhteys"}
+        </Link>
+        <Link href={targetLangPath} onClick={() => setMenuOpen(false)}>
+          {isEnglish ? "FI" : "EN"}
         </Link>
       </MobileMenu>
     </Nav>

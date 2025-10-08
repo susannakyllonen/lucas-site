@@ -49,7 +49,7 @@ const BackgroundText = styled.span`
   font-family: "Satoshi", sans-serif;
   font-size: clamp(4rem, 15vw, 12rem);
   font-weight: 700;
-  color: #1139ec60; /* sininen, mutta läpikuultava */
+  color: #1139ec60;
   z-index: 0;
   pointer-events: none;
   user-select: none;
@@ -82,7 +82,7 @@ const Table = styled.table`
   border-collapse: collapse;
   font-family: "Satoshi", sans-serif;
   margin: 0 auto;
-  min-width: 700px; /* pakottaa scrollaamaan kapeilla näytöillä */
+  min-width: 700px;
 
   th,
   td {
@@ -112,10 +112,10 @@ const Table = styled.table`
   }
 `;
 
-/* --- Päivitetyt tilastot (Transfermarkt lokakuu 2025) --- */
+/* --- Updated stats from Transfermarkt (October 2025) --- */
 const season2025Stats: SeasonStat[] = [
   {
-    competition: "Ykkösliiga (Suomen 2. sarjataso)",
+    competition: "Ykkösliiga (Finland 2nd tier)",
     club: "SJK II",
     matches: 15,
     goals: 1,
@@ -124,7 +124,7 @@ const season2025Stats: SeasonStat[] = [
     redCards: 0,
   },
   {
-    competition: "Kakkonen – Lohko C",
+    competition: "Kakkonen – Group C",
     club: "SJK III",
     matches: 8,
     goals: 1,
@@ -133,7 +133,7 @@ const season2025Stats: SeasonStat[] = [
     redCards: 0,
   },
   {
-    competition: "Suomen Cup",
+    competition: "Finnish Cup",
     club: "SJK II",
     matches: 1,
     goals: 0,
@@ -152,7 +152,7 @@ const season2025Stats: SeasonStat[] = [
   },
 ];
 
-/* Yhteenveto (Transfermarkt: 25 ottelua, 2 maalia, 1 varoitus, 1222 min) */
+/* Totals across all competitions (Transfermarkt summary: 25 matches, 2 goals, 1 yellow, 1222 min) */
 const totalStats = {
   matches: 25,
   goals: 2,
@@ -161,24 +161,24 @@ const totalStats = {
   redCards: 0,
 };
 
-const SeasonStatsTable: React.FC = () => {
+const SeasonStatsTableEn: React.FC = () => {
   return (
     <Section>
       <HeadingWrapper>
         <BackgroundText>24/25</BackgroundText>
-        <Heading>Tilastot</Heading>
+        <Heading>Season Stats</Heading>
       </HeadingWrapper>
       <TableContainer>
         <Table>
           <thead>
             <tr>
-              <th>Kilpailu</th>
-              <th>Seura</th>
-              <th>Ottelut</th>
-              <th>Maalit</th>
-              <th>Minuutit</th>
-              <th>Varoitukset</th>
-              <th>Punaiset</th>
+              <th>Competition</th>
+              <th>Club</th>
+              <th>Matches</th>
+              <th>Goals</th>
+              <th>Minutes</th>
+              <th>Yellow Cards</th>
+              <th>Red Cards</th>
             </tr>
           </thead>
           <tbody>
@@ -194,7 +194,7 @@ const SeasonStatsTable: React.FC = () => {
               </tr>
             ))}
             <tr className="total-row">
-              <td>Yhteensä</td>
+              <td>Total</td>
               <td>-</td>
               <td>{totalStats.matches}</td>
               <td>{totalStats.goals}</td>
@@ -214,7 +214,7 @@ const SeasonStatsTable: React.FC = () => {
           opacity: 0.7,
         }}
       >
-        Lähde:{" "}
+        Source:{" "}
         <a
           href="https://www.transfermarkt.com/lucas-kyllonen/leistungsdaten/spieler/928001"
           target="_blank"
@@ -228,4 +228,4 @@ const SeasonStatsTable: React.FC = () => {
   );
 };
 
-export default SeasonStatsTable;
+export default SeasonStatsTableEn;

@@ -3,6 +3,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { usePathname } from "next/navigation"; // 👈 kielentunnistus
 
 type Sponsor = { name: string; logo: string; url: string };
 
@@ -24,7 +25,7 @@ const Wrapper = styled.div`
 const Heading = styled.h2`
   font-family: "Satoshi", sans-serif;
   font-weight: 700;
-  font-size: clamp(2rem, 5vw, 4.5rem); /* pienemmät arvot */
+  font-size: clamp(2rem, 5vw, 4.5rem);
   line-height: 1.15;
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
@@ -98,14 +99,23 @@ export default function SponsorSection({
 }: {
   items?: Sponsor[];
 }) {
+  const pathname = usePathname();
+  const isEnglish = pathname.startsWith("/en");
+
+  // 👇 kieliversiot
+  const heading = isEnglish ? "Partners" : "Yhteistyökumppanit";
+  const text = isEnglish
+    ? "Lucas collaborates with brands that share his passion for football and personal growth."
+    : "Lucas tekee yhteistyötä intohimoisten ja urheilua tukevien brändien kanssa.";
+  const cta = isEnglish
+    ? "We’re looking for partners for the 2025–26 season. Get in touch →"
+    : "Etsimme kauden 2025–26 yhteistyökumppaneita. Ota yhteyttä →";
+
   return (
     <Section>
       <Wrapper>
-        <Heading>Yhteistyökumppanit</Heading>
-        <Text>
-          Lucas tekee yhteistyötä intohimoisten ja urheilua tukevien brändien
-          kanssa.
-        </Text>
+        <Heading>{heading}</Heading>
+        <Text>{text}</Text>
 
         {items.length ? (
           <Grid>
@@ -123,9 +133,7 @@ export default function SponsorSection({
             ))}
           </Grid>
         ) : (
-          <CTA href="/contact">
-            Etsimme kauden 2025–26 yhteistyökumppaneita. Ota yhteyttä →
-          </CTA>
+          <CTA href={isEnglish ? "/en/contact" : "/contact"}>{cta}</CTA>
         )}
       </Wrapper>
     </Section>

@@ -1,6 +1,7 @@
 "use client";
 
 import styled from "styled-components";
+import { usePathname } from "next/navigation"; // 👈 haetaan nykyinen kieli URL:ista
 
 const FooterWrapper = styled.footer`
   background: #1a1a1a;
@@ -24,10 +25,7 @@ const FooterContent = styled.div`
 
   @media (max-width: 768px) {
     display: grid;
-    grid-template-columns: repeat(
-      2,
-      minmax(140px, 1fr)
-    ); /* Sivut + Seuraa vierekkäin */
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
     grid-row-gap: 1.5rem;
     justify-items: start;
     text-align: left;
@@ -43,7 +41,6 @@ const Column = styled.div`
 
   @media (max-width: 768px) {
     &:nth-child(3) {
-      /* Yhteistyö tulee alle täysleveydelle */
       grid-column: 1 / -1;
       margin-top: 1rem;
     }
@@ -134,40 +131,67 @@ const FooterNote = styled.p`
   }
 `;
 
-export const Footer = () => (
-  <FooterWrapper>
-    <FooterContent>
-      <Column>
-        <FooterHeading>Sivut</FooterHeading>
-        <FooterLink href="/">Etusivu</FooterLink>
-        <FooterLink href="/ura">Ura</FooterLink>
-        <FooterLink href="/media">Media</FooterLink>
-        <FooterLink href="/contact">Yhteys</FooterLink>
-      </Column>
+export const Footer = () => {
+  const pathname = usePathname();
+  const isEnglish = pathname.startsWith("/en");
 
-      <Column>
-        <FooterHeading>Seuraa</FooterHeading>
-        <FooterLink
-          href="https://instagram.com/lucaskyllone"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Instagram
-        </FooterLink>
-      </Column>
+  return (
+    <FooterWrapper>
+      <FooterContent>
+        <Column>
+          <FooterHeading>{isEnglish ? "Pages" : "Sivut"}</FooterHeading>
+          {isEnglish ? (
+            <>
+              <FooterLink href="/en">Home</FooterLink>
+              <FooterLink href="/en/career">Career</FooterLink>
+              <FooterLink href="/en/media">Media</FooterLink>
+              <FooterLink href="/en/contact">Contact</FooterLink>
+            </>
+          ) : (
+            <>
+              <FooterLink href="/">Etusivu</FooterLink>
+              <FooterLink href="/ura">Ura</FooterLink>
+              <FooterLink href="/media">Media</FooterLink>
+              <FooterLink href="/contact">Yhteys</FooterLink>
+            </>
+          )}
+        </Column>
 
-      <Column>
-        <FooterHeading>Yhteistyö</FooterHeading>
-        <Message>
-          Haluatko olla mukana tukemassa Lucaksen matkaa huipulle?{" "}
-          <a href="/contact">Ota yhteyttä →</a>
-        </Message>
-      </Column>
-    </FooterContent>
+        <Column>
+          <FooterHeading>{isEnglish ? "Follow" : "Seuraa"}</FooterHeading>
+          <FooterLink
+            href="https://instagram.com/lucaskyllone"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </FooterLink>
+        </Column>
 
-    <FooterNote>
-      © 2025 Happy Twiggy – All rights reserved. Crafted with care by{" "}
-      <a href="https://happytwiggy.com">Happy Twiggy</a>.
-    </FooterNote>
-  </FooterWrapper>
-);
+        <Column>
+          <FooterHeading>
+            {isEnglish ? "Partnership" : "Yhteistyö"}
+          </FooterHeading>
+          <Message>
+            {isEnglish ? (
+              <>
+                Want to support Lucas on his journey to the top?{" "}
+                <a href="/en/contact">Get in touch →</a>
+              </>
+            ) : (
+              <>
+                Haluatko olla mukana tukemassa Lucaksen matkaa huipulle?{" "}
+                <a href="/contact">Ota yhteyttä →</a>
+              </>
+            )}
+          </Message>
+        </Column>
+      </FooterContent>
+
+      <FooterNote>
+        © 2025 Happy Twiggy – All rights reserved. Crafted with care by{" "}
+        <a href="https://happytwiggy.com">Happy Twiggy</a>.
+      </FooterNote>
+    </FooterWrapper>
+  );
+};

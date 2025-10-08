@@ -24,9 +24,9 @@ const LeftImage = styled.div<{ $visible: boolean }>`
   width: 40%;
   z-index: 0;
   overflow: hidden;
-  background: #fff; /* 👈 nyt täysin valkoinen, ei harmaa */
+  background: #fff; /* 👈 valkoinen tausta, ei harmaa */
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
-  transition: opacity 0.6s ease; /* 👈 pehmeä fade-in */
+  transition: opacity 0.6s ease; /* 👈 smooth fade-in */
 
   img {
     object-fit: cover;
@@ -110,7 +110,7 @@ const SuccessMessage = styled.div`
   margin-top: 1rem;
 `;
 
-export default function ContactPage() {
+export default function ContactPageEn() {
   const [sent, setSent] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
 
@@ -131,7 +131,7 @@ export default function ContactPage() {
       setSent(true);
       form.reset();
     } else {
-      alert("Viestin lähettäminen epäonnistui.");
+      alert("Message sending failed.");
     }
   }
 
@@ -147,26 +147,27 @@ export default function ContactPage() {
           alt="Lucas"
           fill
           priority
-          onLoad={() => setImgLoaded(true)} // fade näkyviin vasta kun kuva on ladattu
+          onLoad={() => setImgLoaded(true)} // 👈 fade näkyviin vasta kun kuva ladattu
         />
       </LeftImage>
 
       <RightContent>
         <Header />
-        <Heading>Ota yhteyttä</Heading>
+        <Heading>Contact</Heading>
         <Subheading>
-          Jos haluat jutella yhteistyöstä, mediasta tai futiksesta yleensä, jätä
-          viesti alle. Luen kaikki viestit ja vastaan niin pian kuin voin.
+          If you’d like to discuss collaborations, media inquiries, or football
+          in general, leave a message below. I read all messages and will get
+          back to you as soon as I can.
         </Subheading>
 
         <Form onSubmit={handleSubmit}>
-          <Input type="text" placeholder="Nimi" required />
-          <Input type="email" placeholder="Sähköposti" required />
-          <TextArea placeholder="Viesti" required />
-          <SubmitButton type="submit">Lähetä</SubmitButton>
+          <Input type="text" placeholder="Name" required />
+          <Input type="email" placeholder="Email" required />
+          <TextArea placeholder="Message" required />
+          <SubmitButton type="submit">Send</SubmitButton>
           {sent && (
             <SuccessMessage>
-              🎉 Viesti lähetetty onnistuneesti! Palaan pian asiaan.
+              🎉 Message sent successfully! I’ll get back to you soon.
             </SuccessMessage>
           )}
         </Form>

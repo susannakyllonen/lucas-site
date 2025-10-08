@@ -5,12 +5,12 @@ import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // 👈 tämä on tärkeä
 
 const Section = styled.section`
   position: relative;
-  --sticky-h: 20vh; /* korkeampi, että nappi on alempana */
+  --sticky-h: 20vh;
   --sticky-center: calc(var(--sticky-h) / 2);
-
   min-height: 120vh;
   background: #fff;
   color: ${({ theme }) => theme.colors.text};
@@ -30,9 +30,10 @@ const Sticky = styled.div`
   pointer-events: none;
 `;
 
-const MinustaWrap = styled(motion.div)`
+const ButtonWrap = styled(motion.div)`
   pointer-events: auto;
-  transform: translateY(40%); /* siirtää nappia alemmas */
+  transform: translateY(40%);
+
   a.btn {
     display: inline-flex;
     align-items: center;
@@ -45,13 +46,16 @@ const MinustaWrap = styled(motion.div)`
     font-weight: 700;
     font-size: 18px;
     text-decoration: none;
-
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    transition:
+      transform 0.15s ease,
+      opacity 0.15s ease;
   }
+
   a.btn:hover {
     opacity: 0.9;
     transform: translateY(-2px);
   }
+
   a.btn:active {
     transform: translateY(0);
   }
@@ -85,7 +89,6 @@ type ImgSpec = {
   xMove: number;
 };
 
-/* Desktop layout (kulmat + keskikuva) */
 const IMAGES_DESKTOP: ImgSpec[] = [
   {
     src: "/lucas.jpeg",
@@ -134,7 +137,6 @@ const IMAGES_DESKTOP: ImgSpec[] = [
   },
 ];
 
-/* Mobile layout (tähti-asettelu) */
 const IMAGES_MOBILE: ImgSpec[] = [
   {
     src: "/field-lucas.jpeg",
@@ -198,14 +200,6 @@ function GalleryItem({ img, p }: { img: ImgSpec; p: MotionValue<number> }) {
         left: img.left,
         right: img.right,
         bottom: img.bottom,
-        transform:
-          img.left === "50%" && img.top === "50%"
-            ? "translate(-50%, -50%)"
-            : img.left === "50%"
-            ? "translateX(-50%)"
-            : img.top === "50%"
-            ? "translateY(-50%)"
-            : "",
       }}
     >
       <Image src={img.src} alt="" fill style={{ objectFit: "cover" }} />
@@ -217,6 +211,12 @@ export default function NameAndGallery() {
   const [isMobile, setIsMobile] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname(); // 👈 tämä kertoo, ollaanko esim. /en tai /-reitillä
+
+  // Vaihdetaan teksti ja linkki kielen perusteella
+  const isEnglish = pathname.startsWith("/en");
+  const buttonText = isEnglish ? "About me" : "Minusta";
+  const buttonLink = isEnglish ? "/en/career" : "/career";
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -235,15 +235,15 @@ export default function NameAndGallery() {
   return (
     <Section ref={ref}>
       <Sticky>
-        <MinustaWrap
+        <ButtonWrap
           initial={{ opacity: 0, y: -6 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.8 }}
         >
-          <Link href="/career" className="btn">
-            Minusta
+          <Link href={buttonLink} className="btn">
+            {buttonText}
           </Link>
-        </MinustaWrap>
+        </ButtonWrap>
       </Sticky>
 
       <Stage ref={stageRef} aria-hidden>
@@ -252,7 +252,7 @@ export default function NameAndGallery() {
         ))}
       </Stage>
 
-      <div id="minusta" style={{ position: "relative", height: "1px" }} />
+      <div id="about" style={{ position: "relative", height: "1px" }} />
     </Section>
   );
 }

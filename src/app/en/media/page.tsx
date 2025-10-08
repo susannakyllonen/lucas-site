@@ -7,7 +7,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 const Main = styled.main`
-  padding: 140px 6vw 80px; /* top, left-right, bottom */
+  padding: 140px 6vw 80px;
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -55,69 +55,65 @@ const GalleryItem = styled.div`
   }
 `;
 
-export default function MediaPage() {
+export default function MediaPageEn() {
   return (
     <>
       <Header />
       <Main>
         <Title>Media</Title>
         <IntroText>
-          Tähän on koottu Lucaksen highlight-videot ja kuvagalleria.
+          Here you can find Lucas’s highlight videos and photo gallery.
         </IntroText>
 
         <AnimatedSection>
-          <SectionTitle>Highlight-video</SectionTitle>
+          <SectionTitle>Highlight Video</SectionTitle>
           <VideoEmbed />
         </AnimatedSection>
 
         <AnimatedSection>
-          <SectionTitle>Kuvagalleria</SectionTitle>
+          <SectionTitle>Photo Gallery</SectionTitle>
           <GalleryGrid>
             <GalleryItem>
-              <Image src="/1.png" alt="Lucas pelissä" fill />
+              <Image src="/1.png" alt="Lucas in a match" fill />
             </GalleryItem>
             <GalleryItem>
-              <Image src="/2.png" alt="Treeneissä" fill />
+              <Image src="/2.png" alt="Training session" fill />
             </GalleryItem>
             <GalleryItem>
               <Image
                 src="/field-lucas.jpeg"
-                alt="Ensiaskeleet jalkapallon parissa"
+                alt="Lucas training on the field"
+                fill
+              />
+            </GalleryItem>
+            <GalleryItem>
+              <Image src="/kentta.jpeg" alt="Football field" fill />
+            </GalleryItem>
+            <GalleryItem>
+              <Image
+                src="/header-lucas.jpeg"
+                alt="Lucas portrait in training"
                 fill
               />
             </GalleryItem>
             <GalleryItem>
               <Image
-                src="/kentta.jpeg"
-                alt="Ensiaskeleet jalkapallon parissa"
-                fill
-              />
-            </GalleryItem>{" "}
-            <GalleryItem>
-              <Image
-                src="/header-lucas.jpeg"
-                alt="Ensiaskeleet jalkapallon parissa"
-                fill
-              />
-            </GalleryItem>{" "}
-            <GalleryItem>
-              <Image
                 src="/kentta-lucas.jpeg"
-                alt="Ensiaskeleet jalkapallon parissa"
+                alt="Lucas practicing at the stadium"
                 fill
               />
             </GalleryItem>
             <GalleryItem>
               <Image
                 src="/lucas-lentaa.jpg"
-                alt="Ensiaskeleet jalkapallon parissa"
+                alt="Lucas mid-air during a game"
                 fill
               />
             </GalleryItem>
             <GalleryItem>
               <Image
                 src="/lucas-lentaa1.jpg"
-                alt="Ensiaskeleet jalkapallon parissa"
+                alt="Lucas jumping in action"
                 fill
               />
             </GalleryItem>

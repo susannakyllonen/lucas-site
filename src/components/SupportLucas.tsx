@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import styled from "styled-components";
 import Image from "next/image";
+import { usePathname } from "next/navigation"; // 👈 tämä mahdollistaa automaattisen kielenvaihdon
 
 const Section = styled.section`
   display: flex;
@@ -24,7 +25,7 @@ const Left = styled.div`
 
   @media (max-width: 768px) {
     order: 1;
-    height: 300px; /* hieman pienempi */
+    height: 300px;
   }
 `;
 
@@ -67,7 +68,7 @@ const Content = styled.div`
   }
 `;
 
-const FloatingButton = styled(motion.div)`
+const FloatingButton = styled(motion.button)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,6 +82,7 @@ const FloatingButton = styled(motion.div)`
   position: relative;
   top: 30px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  outline: none;
 
   &:hover {
     border-color: #007aff;
@@ -93,12 +95,18 @@ const FloatingButton = styled(motion.div)`
     font-family: "Satoshi", sans-serif;
   }
 
+  img {
+    width: 180px; /* 👈 kiinteä leveys */
+    height: auto; /* 👈 ei veny enää */
+    object-fit: contain;
+  }
+
   @media (max-width: 768px) {
     top: 20px;
     padding: 0.7rem 1rem;
+
     img {
-      width: 150px;
-      height: auto;
+      width: 140px;
     }
 
     span {
@@ -109,16 +117,28 @@ const FloatingButton = styled(motion.div)`
 
 export default function DonationSplit() {
   const ref = useRef(null);
+  const pathname = usePathname();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-
   const y = useTransform(scrollYProgress, [0, 1], [-10, 10]);
+
+  const isEnglish = pathname.startsWith("/en");
+
+  // 👇 Tekstit vaihtuvat automaattisesti
+  const heading = isEnglish
+    ? "Buy me a virtual coffee ☕"
+    : "Tarjoa virtuaalikokis";
+  const paragraph = isEnglish
+    ? "Want to support my football journey? Small act, big meaning. Thank you for being part of it!"
+    : "Haluatko tukea matkaani pelikentillä? Pieni ele, iso merkitys. Kiitos, että olet mukana!";
+  const buttonText = isEnglish
+    ? "Donate via MobilePay 💙"
+    : "Lahjoita MobilePaylla 💙";
 
   return (
     <Section ref={ref}>
-      {/* Vasemman puolen kuva */}
       <Left>
         <Image
           src="/lucas-lentaa.jpg"
@@ -129,17 +149,14 @@ export default function DonationSplit() {
         />
       </Left>
 
-      {/* Oikea puoli: tekstit + MobilePay */}
       <Right>
         <Content>
-          <h2>Tarjoa virtuaalikokis</h2>
-          <p>
-            Haluatko tukea matkaani pelikentillä? Pieni ele, iso merkitys.
-            Kiitos, että olet mukana!
-          </p>
+          <h2>{heading}</h2>
+          <p>{paragraph}</p>
         </Content>
 
         <FloatingButton
+          as={motion.button}
           whileHover={{ scale: 1.03 }}
           transition={{ type: "spring", stiffness: 200, damping: 12 }}
           onClick={() =>
@@ -149,12 +166,11 @@ export default function DonationSplit() {
         >
           <Image
             src="/MobilePay_logo.svg.png"
-            alt="MobilePay QR"
-            width={200}
-            height={100}
-            priority
+            alt="MobilePay logo"
+            width={180}
+            height={80}
           />
-          <span>Lahjoita MobilePaylla 💙</span>
+          <span>{buttonText}</span>
         </FloatingButton>
       </Right>
     </Section>

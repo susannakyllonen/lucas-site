@@ -1,8 +1,8 @@
-// components/HighlightSection.tsx
 "use client";
 
 import styled from "styled-components";
 import VideoEmbed from "@/components/VideoEmbed";
+import { usePathname } from "next/navigation"; // 👈 tuo tämä mukaan
 
 const Wrapper = styled.section`
   padding: 6rem 2rem;
@@ -29,13 +29,18 @@ const Subtitle = styled.p`
 `;
 
 export default function HighlightSection() {
+  const pathname = usePathname();
+  const isEnglish = pathname.startsWith("/en");
+
+  const title = isEnglish ? "Goal of the Season" : "Kauden paras maali";
+  const subtitle = isEnglish
+    ? "In the match against KäPa, I scored a goal that was voted the best of the entire season."
+    : "Ottelussa KäPaa vastaan tein maalin, joka valittiin koko kauden parhaaksi.";
+
   return (
     <Wrapper>
-      <Title>Kauden paras maali</Title>
-      <Subtitle>
-        Ottelussa KäPaa vastaan tein maalin, joka valittiin koko kauden
-        parhaaksi.
-      </Subtitle>
+      <Title>{title}</Title>
+      <Subtitle>{subtitle}</Subtitle>
       <VideoEmbed />
     </Wrapper>
   );
