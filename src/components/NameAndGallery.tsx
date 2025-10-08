@@ -5,15 +5,13 @@ import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // 👈 tämä on tärkeä
+import { usePathname } from "next/navigation";
 
 const Section = styled.section`
   position: relative;
   --sticky-h: 20vh;
-  --sticky-center: calc(var(--sticky-h) / 2);
   min-height: 120vh;
   background: #fff;
-  color: ${({ theme }) => theme.colors.text};
 
   @media (max-width: 768px) {
     min-height: 90vh;
@@ -27,13 +25,10 @@ const Sticky = styled.div`
   height: var(--sticky-h);
   display: grid;
   place-items: center;
-  pointer-events: none;
 `;
 
 const ButtonWrap = styled(motion.div)`
-  pointer-events: auto;
   transform: translateY(40%);
-
   a.btn {
     display: inline-flex;
     align-items: center;
@@ -50,14 +45,9 @@ const ButtonWrap = styled(motion.div)`
       transform 0.15s ease,
       opacity 0.15s ease;
   }
-
   a.btn:hover {
     opacity: 0.9;
     transform: translateY(-2px);
-  }
-
-  a.btn:active {
-    transform: translateY(0);
   }
 `;
 
@@ -89,6 +79,7 @@ type ImgSpec = {
   xMove: number;
 };
 
+// 🖥 Desktop
 const IMAGES_DESKTOP: ImgSpec[] = [
   {
     src: "/lucas.jpeg",
@@ -137,6 +128,7 @@ const IMAGES_DESKTOP: ImgSpec[] = [
   },
 ];
 
+// 📱 Mobile
 const IMAGES_MOBILE: ImgSpec[] = [
   {
     src: "/field-lucas.jpeg",
@@ -185,6 +177,55 @@ const IMAGES_MOBILE: ImgSpec[] = [
   },
 ];
 
+// 💻 Tablet (uusi lisäys)
+const IMAGES_TABLET: ImgSpec[] = [
+  {
+    src: "/field-lucas.jpeg",
+    w: 300,
+    h: 280,
+    top: "25%",
+    left: "25%",
+    yMove: 10,
+    xMove: 0,
+  },
+  {
+    src: "/lucas.jpeg",
+    w: 180,
+    h: 200,
+    top: "5%",
+    left: "5%",
+    yMove: -10,
+    xMove: 0,
+  },
+  {
+    src: "/kentta-lucas.jpeg",
+    w: 180,
+    h: 200,
+    bottom: "10%",
+    right: "5%",
+    yMove: 10,
+    xMove: 0,
+  },
+  {
+    src: "/kentta.jpeg",
+    w: 180,
+    h: 200,
+    bottom: "10%",
+    left: "5%",
+    yMove: 0,
+    xMove: -10,
+  },
+  {
+    src: "/header-lucas.jpeg",
+    w: 220,
+    h: 260,
+    top: "10%",
+    right: "5%",
+    yMove: 0,
+    xMove: 10,
+  },
+];
+
 function GalleryItem({ img, p }: { img: ImgSpec; p: MotionValue<number> }) {
   const x = useTransform(p, [0, 1], [0, img.xMove]);
   const y = useTransform(p, [0, 1], [0, img.yMove]);
@@ -208,18 +249,23 @@ function GalleryItem({ img, p }: { img: ImgSpec; p: MotionValue<number> }) {
 }
 
 export default function NameAndGallery() {
-  const [isMobile, setIsMobile] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [layoutMode, setLayoutMode] = useState<"mobile" | "tablet" | "desktop">(
+    "desktop"
+  );
   const stageRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname(); // 👈 tämä kertoo, ollaanko esim. /en tai /-reitillä
-
-  // Vaihdetaan teksti ja linkki kielen perusteella
+  const pathname = usePathname();
   const isEnglish = pathname.startsWith("/en");
   const buttonText = isEnglish ? "About me" : "Minusta";
   const buttonLink = isEnglish ? "/en/career" : "/career";
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => {
+      const w = window.innerWidth;
+      if (w < 768) setLayoutMode("mobile");
+      else if (w < 1100)
+        setLayoutMode("tablet"); // iPad ja pienet läppärit
+      else setLayoutMode("desktop");
+    };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -230,10 +276,15 @@ export default function NameAndGallery() {
     offset: ["start end", "end start"],
   });
 
-  const imagesToUse = isMobile ? IMAGES_MOBILE : IMAGES_DESKTOP;
+  const imagesToUse =
+    layoutMode === "mobile"
+      ? IMAGES_MOBILE
+      : layoutMode === "tablet"
+        ? IMAGES_TABLET
+        : IMAGES_DESKTOP;
 
   return (
-    <Section ref={ref}>
+    <Section>
       <Sticky>
         <ButtonWrap
           initial={{ opacity: 0, y: -6 }}
@@ -251,8 +302,6 @@ export default function NameAndGallery() {
           <GalleryItem key={`${img.src}-${i}`} img={img} p={galleryP} />
         ))}
       </Stage>
-
-      <div id="about" style={{ position: "relative", height: "1px" }} />
     </Section>
   );
 }
