@@ -85,9 +85,9 @@ const Text = styled(motion.div)`
   line-height: 1.75;
   font-family: "Satoshi", sans-serif;
 
-  p {
-    max-width: 720px; /* ennen esim. 600px — leveämpi nyt */
-    margin: 0;
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    line-height: 1.6;
   }
 `;
 

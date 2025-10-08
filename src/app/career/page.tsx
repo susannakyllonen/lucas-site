@@ -83,6 +83,11 @@ const Text = styled(motion.div)`
   font-size: 1.5rem;
   line-height: 1.75;
   font-family: "Satoshi", sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
 `;
 
 const Stats = styled.div`
